@@ -1,5 +1,5 @@
 <?php
-// Bibliothèque FPDF
+// Assurez-vous d'inclure la bibliothèque FPDF
 require('fpdf.php');
 // Connexion à la base de données
 $conn = new mysqli('localhost', 'root', '', 'caeb');
@@ -64,32 +64,35 @@ foreach ($renseignements as $ligne) {
 
 $pdf->Ln(10);
 
-    // Récupérer les images liées au dossier à partir de la table "images"
-    $sqlImages = "SELECT * FROM images WHERE id_dossier = " . $data['id_dossier'];
-    $resultImages = $conn->query($sqlImages);
+    $id_image1 = 1;
 
-    // Vérifier si des images ont été trouvées
-    if ($resultImages->num_rows > 0) {
-        $pdf->Ln(10);
-        $pdf->SetFont('Arial', 'B', 14);
-        $pdf->Cell(0, 10, 'Images scannées', 0, 1);
+    // Récupérer les données de l'image depuis la base de données (assurez-vous d'avoir une colonne BLOB pour stocker les images)
+    $sql_image = "SELECT imageData FROM images WHERE id_image = '$id_image'";
+    $result_image = $conn->query($sql_image);
 
-        // Ajouter les images au document PDF
-        while ($imageData = $resultImages->fetch_assoc()) {
-            // Afficher l'image à partir des données binaires
-            $pdf->Ln(10);
-            $pdf->Cell(0, 10, 'Nom de l\'image: ' . $imageData['nomImage'], 0, 1);
-            // ... Ajoutez ici d'autres informations sur l'image si nécessaire
-            $image = $imageData['imageData']; // Récupérer les données binaires de l'image
-            $pdf->Image('@' . $image, 10, $pdf->GetY(), 0, 40); // Largeur de l'image fixée à 40, ajustez-la selon vos besoins
-        }
+    if ($result_image->num_rows > 0) {
+        // Récupérer les données binaires de l'image
+        $row_image = $result_image->fetch_assoc();
+        $imageData = $row_image["imageData"];
+         
+        // Déterminer le type de contenu de l'image
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $imageType = $finfo->buffer($imageData);
+        
+        // En-tête pour définir le type de contenu de l'image
+        header('Content-Type: ' . $imageType);
+
+        // Afficher l'image
+        echo $imageData;
+    } else {
+        die('Aucune image trouvée dans la base de données avec cet ID.');
     }
 
     // Enregistrez le PDF sur le serveur
     //$pdf->Output('D', 'dossier_informations.pdf');
     // Ou envoyez le PDF directement au navigateur
-    $pdf->Output();
-    exit; // Arrêtez l'exécution du script ici, afin d'éviter d'afficher le reste du code HTML.
+     $pdf->Output();
+     exit; // Arrêtez l'exécution du script ici, afin d'éviter d'afficher le reste du code HTML.
 } else {
     echo "Une erreur s'est produite lors de l'enregistrement des informations.";
 }
