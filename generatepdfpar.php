@@ -1,5 +1,5 @@
 <?php
-// Assurez-vous d'inclure la bibliothèque FPDF
+// Bibliothèque FPDF
 require('fpdf.php');
 // Connexion à la base de données
 $conn = new mysqli('localhost', 'root', '', 'caeb');
