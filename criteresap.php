@@ -41,7 +41,8 @@
             border-radius: 5px;
         }
 
-        button[type="submit"] {
+        button[type="submit"],
+        button[type="reset"] {
             background-color: #007bff;
             color: #fff;
             padding: 10px 20px;
@@ -50,7 +51,8 @@
             cursor: pointer;
         }
 
-        button[type="submit"]:hover {
+        button[type="submit"],
+        button[type="reset"]:hover {
             background-color: #0056b3;
         }
     </style>
@@ -77,6 +79,12 @@
             <input type="text" id="adresse" name="classe" class="form-control">
         </div>
         <button type="submit" class="btn btn-primary">Rechercher</button>
+        <button type="reset" class="btn btn-primary" onclick="goToAnotherPage()">Retour</button>
     </form>
+    <script>
+    function goToAnotherPage() {   
+        window.location.href = "profil.php"; 
+    }  
+</script> 
 </body>
 </html>
