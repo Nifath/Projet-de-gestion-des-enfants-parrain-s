@@ -38,6 +38,7 @@ if (isset($_POST['submit'])) {
             background-image: url("image0.jpg");
             background-size: cover;
             background-position: center;
+            padding:20px
         }
 
         .container {
@@ -50,31 +51,38 @@ if (isset($_POST['submit'])) {
             margin-top: 50px;
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
+        
         h1 {
             text-align: center;
             margin-bottom: 30px;
             color: #007bff;
         }
 
-        button[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 2px;
-            cursor: pointer;
-            width: 100%;
-        }
+        form {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-
+    input[type="text"]
+     {
+      width: 95%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+   
+    .custom-btn {
+        background-color: #4c96af; 
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 10px 20px;
+    }
         .results {
             margin-top: 20px;
         }
@@ -86,20 +94,27 @@ if (isset($_POST['submit'])) {
         <div class="row justify-content-center"> 
              
                 <form method="POST" action="#">
-                    <div class="form-row"> 
-                        <div class="form-group col-md-12">
+                    
                             <label for="nom">Nom:</label>
                             <input type="text" id="nom" name="nom" class="form-control" required>
-                        </div>
-                        <div class="form-group col-md-12">
+                       <div>
                             <label for="prenom">Prénom(s):</label>
                             <input type="text" id="prenom" name="prenom" class="form-control" required>
-                        </div>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" name="submit" class="btn btn-primary">Rechercher</button>
                     </div>
+                    
+                    <button type="submit" name="submit" class="btn btn-primary custom-btn">Rechercher</button>
+                    <button type="submit" class="btn btn-primary" onclick="goToAnotherPage()">Retour</button>
+                    
                 </form>
+        
+                <script>
+                     function goToAnotherPage() {   
+        window.location.href = "index.php"; 
+    
+    }
+    
+                </script>
 
         <?php if (!empty($enfantsParraines)): ?>
             <h2 class="mt-4">Résultats de la Recherche :</h2>
@@ -116,8 +131,9 @@ if (isset($_POST['submit'])) {
                     Nom du tuteur:<?php echo $enfant['nomTuteur']; ?><br>
                     Classe : <?php echo $enfant['classe']; ?><br>
                     Etablissement:<?php echo $enfant['etablissement']; ?><br>
-                    Date de parrainage: <?php echo $enfant['dateParrainage']; ?><br>
                     Renseignement:<?php echo $enfant['renseignement']; ?><br>
+
+                    <button>Voir plus</button>
                 </li>
                 <?php endforeach; ?>
             </ul>
