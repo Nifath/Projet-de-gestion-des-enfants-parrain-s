@@ -66,26 +66,17 @@ $result = $instruct->get_result()->fetch_all(MYSQLI_ASSOC);
             background-color: #f2f2f2;
         }
         
-        .btn {
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 3px;
-            
-        }
-        
         .btn-view {
             background-color: #4CAF50;
             color: white;
-        }
-        
-       
-        .section {
-            display: none;
-        }
-        
-        .section.open {
-            display: block;
+            width: fit-content;
+            margin-bottom:20px;
+            padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    text-align: 0;
+    border-radius: 6px;
+    text-decoration: 0;
         }
     </style>
 </head>
@@ -100,7 +91,7 @@ $result = $instruct->get_result()->fetch_all(MYSQLI_ASSOC);
                 <th>Adresse</th>
                 <th>Contact</th>
                 <th>Profession</th>
-                <th>Actions</th>
+                <th>Action</th>
 
               
             </tr>
@@ -116,7 +107,7 @@ $result = $instruct->get_result()->fetch_all(MYSQLI_ASSOC);
                 <td><?= $row['profession'] ?></td>
 
                 <td>
-                    <button class="btn btn-view" onclick="toggleSection('section1')">Voir</button>
+                <a   class="btn-view" href="voir1ap.php?id=<?=$row['id_dossier2']?>">Voir</a>
                     
                 </td>
                 
@@ -125,12 +116,11 @@ $result = $instruct->get_result()->fetch_all(MYSQLI_ASSOC);
         </tbody>
     </table>
     <br> 
-    <button onclick="goBack()">Retour</button>
-
+    <button onclick="goToAnotherPage()">Retour</button>
 
 <script>
-    function goBack() {
-        window.history.back(); 
+    function goToAnotherPage() {   
+        window.location.href = "criteresap.php"; 
     }  
 </script>    
 </body>
