@@ -54,7 +54,7 @@
   <div class="container">
     <h1>Génération des rapports trimestriels</h1>
     
-    <form id="report-form">
+    <form id="report-form" method="POST" action="rapportenreg.php">
       <label for="period">Sélectionnez la période :</label>
       <select id="period">
         <option value="">-- Choisissez une période --</option>
@@ -76,4 +76,3 @@
   <script src="script.js"></script>
 </body>
 </html>
-
