@@ -43,41 +43,84 @@ $result = $instruct->get_result()->fetch_all(MYSQLI_ASSOC);
             background-color: #f2f2f2;
         }
         
-        .btn {
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-        
-        .btn-view {
+         .btn-view {
             background-color: #4CAF50;
             color: white;
+            width: fit-content;
+            margin-bottom:20px;
+            padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    text-align: 0;
+    border-radius: 6px;
+    text-decoration: 0;
         }
         
         .btn-edit {
             background-color: #2196F3;
             color: white;
+            width: fit-content;
+            margin-bottom:20px;
+            padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    text-align: 0;
+    border-radius: 6px;
+    text-decoration: 0;
         }
         
         .btn-delete {
             background-color: #f44336;
             color: white;
+            width: fit-content;
+            margin-bottom:20px;
+            padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    text-align: 0;
+    border-radius: 6px;
+    text-decoration: 0;
         }
         
-        .section {
-            display: none;
-        }
         
-        .section.open {
-            display: block;
-        }
+
+        .Btn_add {
+    width: fit-content;
+    margin-bottom:20px;
+    background-color: black;
+    padding: 5px 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-align: 0;
+    border-radius: 6px;
+    text-decoration: 0;
+}
+button{
+    width: fit-content;
+    margin-bottom:20px;
+    background-color:black;
+    padding: 5px 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-align: 0;
+    border-radius: 6px;
+    text-decoration: 0; 
+}
+
+.btn-view, .btn-edit, .btn-delete {
+    display: inline-block;
+     margin: 10px;
+        padding: 5px 10px; 
+    }
     </style>
 </head>
 <body>
     <center>
         <h1>Anciens parrainés</h1>
     </center>
+    <a href="dossier ancpar.php" class="Btn_add"> Ajouter</a>
     <table>
         <thead>
             <tr>
@@ -103,9 +146,9 @@ $result = $instruct->get_result()->fetch_all(MYSQLI_ASSOC);
                 <td><?= $row['profession'] ?></td>
 
                 <td>
-                    <button class="btn btn-view" onclick="toggleSection('section1')">Voir</button>
-                    <button class="btn btn-edit" onclick="toggleSection('section1')">Modifier</button>
-                    <button class="btn btn-delete" onclick="toggleSection('section1')">Supprimer</button>
+                <a   class="btn-view" href="voirap.php?id=<?=$row['id_dossier2']?>">Voir</a>
+                <a   class="btn-edit" href="modifierap.php?id=<?=$row['id_dossier2']?>">Modifier</a>
+                <a   class="btn-delete" href="supprimerap.php?id=<?=$row['id_dossier2']?>">Supprimer</a>
                 </td>
                 
             </tr>
@@ -113,13 +156,14 @@ $result = $instruct->get_result()->fetch_all(MYSQLI_ASSOC);
         </tbody>
     </table>
     <br>  
-    <button onclick="goBack()">Retour</button>
+    <button onclick="goToAnotherPage()">Retour</button>
 
 
 <script>
-    function goBack() {
-        window.history.back(); 
-    }  
+    function goToAnotherPage() {   
+        window.location.href = "profil.php";
+    
+    } 
 </script>   
 </body>
 </html>
