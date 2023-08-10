@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 }
 
 // Récupération de la liste des étudiants
-$instruct = $conn->prepare('SELECT * FROM dossier');
+$instruct = $conn->prepare('SELECT * FROM dossier1');
 $instruct->execute();
 $result = $instruct->get_result()->fetch_all(MYSQLI_ASSOC);
 ?>
@@ -34,48 +34,89 @@ $result = $instruct->get_result()->fetch_all(MYSQLI_ASSOC);
         }
         
         th, td {
-            padding: 8px;
+            padding:  8px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+        
         }
         
         th {
             background-color: #f2f2f2;
         }
         
-        .btn {
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 3px;
-        }
+       
         
         .btn-view {
             background-color: #4CAF50;
             color: white;
-    
+            width: fit-content;
+            margin-bottom:20px;
+            padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    text-align: 0;
+    border-radius: 6px;
+    text-decoration: 0;
         }
         
         .btn-edit {
             background-color: #2196F3;
             color: white;
+            width: fit-content;
+            margin-bottom:20px;
+            padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    text-align: 0;
+    border-radius: 6px;
+    text-decoration: 0;
         }
         
         .btn-delete {
             background-color: #f44336;
             color: white;
+            width: fit-content;
+            margin-bottom:20px;
+            padding: 5px 20px;
+    display: flex;
+    align-items: center;
+    text-align: 0;
+    border-radius: 6px;
+    text-decoration: 0;
         }
         
-        .section {
-            display: none;
-        }
         
-        .section.open {
-            display: block;
-        }
-        .topbar .logo{
-            padding:-5px;
-        }
+
+        .Btn_add {
+    width: fit-content;
+    margin-bottom:20px;
+    background-color: black;
+    padding: 5px 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-align: 0;
+    border-radius: 6px;
+    text-decoration: 0;
+}
+button{
+    width: fit-content;
+    margin-bottom:20px;
+    background-color:black;
+    padding: 5px 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-align: 0;
+    border-radius: 6px;
+    text-decoration: 0; 
+}
+
+.btn-view, .btn-edit, .btn-delete {
+    display: inline-block;
+     margin: 10px;
+        padding: 5px 10px; /* Ajustez les valeurs de padding selon vos préférences */
+    }
     </style>
 </head>
 <body>
@@ -83,11 +124,14 @@ $result = $instruct->get_result()->fetch_all(MYSQLI_ASSOC);
     <center>
         <h1>Enfants non parrainés</h1>
     </center>
+    <a href="dossier nonpar.php" class="Btn_add"> Ajouter</a>
+        
+
     <table>
         <thead>
             <tr>
                 <th>Nom</th>
-                <th>Prenom(s)</th>
+                <th>Prenom(s)</th>,
                 <th>Sexe</th>
                 <th>Date de Naissance</th>
                 <th>Classe</th>
@@ -102,22 +146,24 @@ $result = $instruct->get_result()->fetch_all(MYSQLI_ASSOC);
                 <td><?= $row['sexe'] ?></td>
                 <td><?= $row['dateNaissance'] ?></td>
                 <td><?= $row['classe'] ?></td>
+
                 <td>
-                    <button class="btn btn-view" onclick="toggleSection('section1')">Voir</button>
-                    <button class="btn btn-edit" onclick="toggleSection('section1')">Modifier</button>
-                    <button class="btn btn-delete" onclick="toggleSection('section1')">Supprimer</button>
-                </td>
+                <a   class="btn-view" href="voirnp.php?id=<?=$row['id_dossier1']?>">Voir</a>
+                <a   class="btn-edit" href="modifiernp.php?id=<?=$row['id_dossier1']?>">Modifier</a>
+                <a   class="btn-delete" href="supprimernp.php?id=<?=$row['id_dossier1']?>">Supprimer</a>
+            </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
     <br>  
-    <button onclick="goBack()">Retour</button>
+    <button onclick="goToAnotherPage()">Retour</button>
 
     <script>
-    function goBack() {
-        window.history.back(); 
-    }  
+     function goToAnotherPage() {   
+        window.location.href = "profil.php"; 
+    
+    }
 </script>   
 
     
